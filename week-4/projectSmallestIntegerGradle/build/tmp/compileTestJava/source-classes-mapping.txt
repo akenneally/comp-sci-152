@@ -1,0 +1,2 @@
+bsu/comp152/SmallestIntegerTest.java
+ bsu.comp152.SmallestIntegerTest

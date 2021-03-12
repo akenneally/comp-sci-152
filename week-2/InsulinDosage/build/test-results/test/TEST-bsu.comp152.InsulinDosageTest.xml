@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="bsu.comp152.InsulinDosageTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-03-02T20:24:02" hostname="Alicias-Air.fios-router.home" time="0.328">
+  <properties/>
+  <testcase name="mainPrintsFourthAnswer()" classname="bsu.comp152.InsulinDosageTest" time="0.152"/>
+  <testcase name="dosageCalculatesSecondAnswer()" classname="bsu.comp152.InsulinDosageTest" time="0.092"/>
+  <testcase name="dosageCalculatesFirstAnswer()" classname="bsu.comp152.InsulinDosageTest" time="0.009"/>
+  <testcase name="dosageReturnsAnswerTo6DecimalPlaces()" classname="bsu.comp152.InsulinDosageTest" time="0.021"/>
+  <testcase name="mainPrintsFirstAnswer()" classname="bsu.comp152.InsulinDosageTest" time="0.007"/>
+  <testcase name="dosageCalculatesThirdAnswer()" classname="bsu.comp152.InsulinDosageTest" time="0.004"/>
+  <testcase name="mainPrintsSecondAnswer()" classname="bsu.comp152.InsulinDosageTest" time="0.003"/>
+  <testcase name="mainPrintsThirdAnswer()" classname="bsu.comp152.InsulinDosageTest" time="0.002"/>
+  <testcase name="dosageCalculatesFourthAnswer()" classname="bsu.comp152.InsulinDosageTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

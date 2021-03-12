@@ -85,7 +85,7 @@ public class Hand {
     //Note, Card class has getAbbrev method to call
     //Abbreviations should be separated by commas
     //the hand as a whole should be surrounded by []
-    //adding to github. again. hhahahahah
+    //adding to github. again. hhahahahah. again.
     @Override
     public String toString() {
         if (getNumCards() > 0) {

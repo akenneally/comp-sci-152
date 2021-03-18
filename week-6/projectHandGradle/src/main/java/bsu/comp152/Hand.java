@@ -31,7 +31,7 @@ public class Hand {
     // The number of cards in the hand is called numCards.
     // Declare it as an integer.
     private int numCards;
-    private int mCards;
+    private final int mCards;
 
     //Constructor that takes single int parameter
     //specifies number of cards that hand holds
@@ -85,7 +85,6 @@ public class Hand {
     //Note, Card class has getAbbrev method to call
     //Abbreviations should be separated by commas
     //the hand as a whole should be surrounded by []
-    //adding to github. again. hhahahahah. again.
     @Override
     public String toString() {
         if (getNumCards() > 0) {
@@ -100,9 +99,15 @@ public class Hand {
 
     //instance method getCard,
     //takes index i and returns card at that position in cards array
-    //if index is valid or no card at that specified position in array,
+    //if index is invalid or no card at that specified position in array,
     //method should throw IllegalArgumentException
-
+    public Card getCard(int cardAtPosition){
+        if (cardAtPosition >= cards.length){
+            throw new IllegalArgumentException("No card at this position in array.");
+        } else {
+            return cards[cardAtPosition];
+        }
+    }
 
     //instance method playCard
     //takes index i, plays card at that position in cards array
@@ -126,6 +131,9 @@ public class Hand {
     //if index specified by the parameter is invalid
     //or if there is no card at the specified position in the array
     //should throw an IllegalArgumentException
+    public Card playCard(int cardAtPosition){
+        cardAtPosition =
+    }
 
 
     //instance method highCard
@@ -136,20 +144,29 @@ public class Hand {
         //the King of Hearts
     //If multiple cards are tied for largest value
     //return the one that comes closest to the beginning of the cards array
-
+    public Card highCard(Card largestValue){
+        largestValue =
+        for (int i = 0; i < n; i++)
+            if (a[i] > max) max = a[i];
+    }
 
     //instance method numCardsOfRank
     //takes int parameter specifying a rank
     //return number of cards in Hand with that rank
     //does not need to check if parameter is valid
     //If parameter is invalid, method can simply return 0
+    public Card numCardsOfRank(int cardsWithRank){
 
+    }
 
     //instance method hasFlush
     //returns TRUE if all cards in Hand have same suit
     //FALSE if they do not
     //does not need to exclude hands that would be classified as something else
     //as long as cards are all same suit
+    public Card hasFlush(){
+
+    }
 
 
 }

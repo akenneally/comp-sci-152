@@ -9,7 +9,7 @@
  */
 package bsu.comp152;
 
-public class Hand {
+public class Hand<newCard> {
     /* Constants for types of hands
      * The numbers used for the hand types increase
      * with the value of the hand type.
@@ -24,7 +24,7 @@ public class Hand {
     private static final int FLUSH = 4;
     private static final int FOUR_OF_A_KIND = 5;
 
-    // The instanfields for a Hand object
+    // The instance fields for a Hand object
     // The Card objects in the Hand object are stored in array called cards.
     // Declare the array of Card objects.
     private Card[] cards;
@@ -46,6 +46,23 @@ public class Hand {
         mCards = maxCards;
         numCards = maxCards;
     }
+
+    //instance method ThreeOfAKind
+    //returns true if Hand includes at least 3 cards with same rank
+    //returns false if it does not
+    //does not need to exclude hands that would be classified as something different
+    //using boolean for threeOFAKind
+    //checking of hand = THREE_OF_A_KIND
+    //if yes, returning true
+    //if no, returning false
+    public boolean threeOfAKind(){
+        if (cards.equals(THREE_OF_A_KIND)){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     //instance method getNumCards
     //returns number of cards currently in hand
     public int getNumCards() {
@@ -67,8 +84,7 @@ public class Hand {
         if (getNumCards() == mCards) {
             throw new IllegalStateException();
         }
-        // confirm left to right and not right to left
-        cards.push(newCard);
+        // confirm left to right and not right to left;
         numCards++;
     }
 
@@ -79,6 +95,7 @@ public class Hand {
         }
         return totalValue;
     }
+
     //instance method toString
     //returns a String representation of Hand object
     //String should have the form "[card0, card1, ..., cardn]"
@@ -95,6 +112,8 @@ public class Hand {
             str = str + "]";
             return str;
         }
+
+        return toString();
     }
 
     //instance method getCard,
@@ -102,10 +121,11 @@ public class Hand {
     //if index is invalid or no card at that specified position in array,
     //method should throw IllegalArgumentException
     public Card getCard(int cardAtPosition){
+//        this is a check to be sure you dont select a card outside of whats available
         if (cardAtPosition >= cards.length){
             throw new IllegalArgumentException("No card at this position in array.");
         } else {
-            return cards[cardAtPosition];
+           return cards[cardAtPosition];
         }
     }
 
@@ -131,10 +151,18 @@ public class Hand {
     //if index specified by the parameter is invalid
     //or if there is no card at the specified position in the array
     //should throw an IllegalArgumentException
-    public Card playCard(int cardAtPosition){
-        cardAtPosition =
-    }
+    public Card playCard(int i){
+        Card[] getCard = new Card[0];
+        Card playedCard = getCard[i];
+        // removing the played card from the cards
+        // shift cards from empty
+        // return the play card
+        for (int j = i; j < numCards-1; j++){
+            cards[j] = cards[j+1];
+        }
 
+        return playedCard;
+    }
 
     //instance method highCard
     //returns Card object in Hand w/largest value
@@ -144,10 +172,22 @@ public class Hand {
         //the King of Hearts
     //If multiple cards are tied for largest value
     //return the one that comes closest to the beginning of the cards array
-    public Card highCard(Card largestValue){
-        largestValue =
-        for (int i = 0; i < n; i++)
-            if (a[i] > max) max = a[i];
+    public Card highCard(){
+        sortCardsValue();
+        return cards[cards.length-1];
+    }
+
+    public void sortCardsValue() {
+        Card tempCard;
+        for (int i = 0; i < numCards; i++){
+            for (int ii = i+1; ii < numCards; ii++){
+                if (cards[i].getValue() < cards[ii].getValue()) {
+                    tempCard = cards[i];
+                    cards[i] = cards[ii];
+                    cards[ii] = tempCard;
+                }
+            }
+        }
     }
 
     //instance method numCardsOfRank
@@ -155,8 +195,14 @@ public class Hand {
     //return number of cards in Hand with that rank
     //does not need to check if parameter is valid
     //If parameter is invalid, method can simply return 0
-    public Card numCardsOfRank(int cardsWithRank){
-
+    public int numCardsOfRank(int cardWithValue){
+        int counter = 0;
+        for (int i = 0; i < numCards; i++){
+            if (cards[i].getValue() == cardWithValue) {
+                counter++;
+            }
+        }
+        return counter;
     }
 
     //instance method hasFlush
@@ -164,8 +210,12 @@ public class Hand {
     //FALSE if they do not
     //does not need to exclude hands that would be classified as something else
     //as long as cards are all same suit
-    public Card hasFlush(){
+    public boolean hasFlush(){
+        if (cards.equals(FLUSH)){
 
+        }
+
+        return false;
     }
 
 

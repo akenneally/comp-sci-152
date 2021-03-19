@@ -36,13 +36,16 @@ public class Main {
         System.out.println(c3);
         System.out.println(c3.getAbbrev());
 
-        int maxCards = 0;
+
+        //int maxCards = 0;
         Hand h = new Hand(15);
         h.addCard(c1);
         h.addCard(c2);
         h.addCard(c3);
         h.addCard(c4);
         h.addCard(c5);
-        System.out.println(h.getTotalValue());
+
+        System.out.println(h.threeOfAKind());
+        //System.out.println(h.getTotalValue());
     }
 }

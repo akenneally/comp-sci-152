@@ -31,20 +31,19 @@ public class Hand<newCard> {
     // The number of cards in the hand is called numCards.
     // Declare it as an integer.
     private int numCards;
-    private final int mCards;
 
     //Constructor that takes single int parameter
     //specifies number of cards that hand holds
     //ex; if creating Hand for Blackjack, may allow room for 15 cards
-        //Hand h = new Hand(15);
+    //Hand h = new Hand(15);
     //should create array capable of storing specified # of cards
     //assign it to field cards
     //initialize the numCards field to reflect the hand is initially empty
     //Hand methods will need to process the cards array
     //If Hand is currently empty (no cards), method returns 0
     public Hand(int maxCards){
-        mCards = maxCards;
-        numCards = maxCards;
+        cards = new Card[maxCards];
+        numCards = 0;
     }
 
     //instance method ThreeOfAKind
@@ -81,17 +80,17 @@ public class Hand<newCard> {
         if (newCard == null) {
             throw new IllegalArgumentException();
         }
-        if (getNumCards() == mCards) {
+        if (numCards == cards.length) {
             throw new IllegalStateException();
         }
-        // confirm left to right and not right to left;
-        numCards++;
+        // add new card to the hand array and update numCards
+        cards[numCards++] = newCard;
     }
 
     public int getTotalValue(){
         int totalValue = 0;
-        for(Card c : cards) {
-            totalValue = totalValue + c.getValue();
+        for (int i = 0; i < numCards; i++) {
+            totalValue = totalValue + cards[i].getValue();
         }
         return totalValue;
     }
@@ -104,16 +103,26 @@ public class Hand<newCard> {
     //the hand as a whole should be surrounded by []
     @Override
     public String toString() {
-        if (getNumCards() > 0) {
-            String str = "[" + cards[0].getAbbrev();
-            for (int i = 1; i <= numCards; i++) {
-                str = str + ", " + cards[i].getAbbrev();
-            }
-            str = str + "]";
-            return str;
-        }
+        String str = "[";
 
-        return toString();
+        for (int i = 0; i < numCards; i++) {
+            str += cards[i].getAbbrev();
+            if (i != numCards-1)
+                str += ", ";
+        }
+        str += "]";
+        return str;
+
+//        if (getNumCards() > 0) {
+//            String str = "[" + cards[0].getAbbrev();
+//            for (int i = 1; i <= numCards; i++) {
+//                str = str + ", " + cards[i].getAbbrev();
+//            }
+//            str = str + "]";
+//            return str;
+//        }
+//
+//        return toString();
     }
 
     //instance method getCard,
@@ -122,11 +131,12 @@ public class Hand<newCard> {
     //method should throw IllegalArgumentException
     public Card getCard(int cardAtPosition){
 //        this is a check to be sure you dont select a card outside of whats available
-        if (cardAtPosition >= cards.length){
+        if (cardAtPosition >= cards.length)
+            throw new IllegalArgumentException("Hand can not hold this many cards.");
+        if (cardAtPosition >= numCards)
             throw new IllegalArgumentException("No card at this position in array.");
-        } else {
-           return cards[cardAtPosition];
-        }
+
+        return cards[cardAtPosition];
     }
 
     //instance method playCard
@@ -136,13 +146,13 @@ public class Hand<newCard> {
     //method should shift over any cards that come after the removed card
     //to fill in gap created by removed card
     //ex; Hand h1 = new Hand (5);
-        //h1.addCard(newCard(5,Card.DIAMONDS)); 5 of Diamonds
-        //h1.addCard(newCard(Card.Ace,Card.Spades)); Ace of Spades
-        //h1.addCard(newCard(Card.King,Card.Heart)); King of Hearts
+    //h1.addCard(newCard(5,Card.DIAMONDS)); 5 of Diamonds
+    //h1.addCard(newCard(Card.Ace,Card.Spades)); Ace of Spades
+    //h1.addCard(newCard(Card.King,Card.Heart)); King of Hearts
     //After these statements there are 2 Card objects in cards array
     //5D in position 0, AS in position 1, KH in position 2
     //To play 5D we can do;
-        //Card playedCard=h.playCard(0); play card position 0
+    //Card playedCard=h.playCard(0); play card position 0
     //After the return, the 5D will be assigned to variable playedCard
     //Also, contents of cards array will change
     //5D will no longer be in cards array
@@ -151,17 +161,22 @@ public class Hand<newCard> {
     //if index specified by the parameter is invalid
     //or if there is no card at the specified position in the array
     //should throw an IllegalArgumentException
-    public Card playCard(int i){
-        Card[] getCard = new Card[0];
-        Card playedCard = getCard[i];
-        // removing the played card from the cards
-        // shift cards from empty
-        // return the play card
-        for (int j = i; j < numCards-1; j++){
+    public Card playCard(int cardPosition){
+        Card playedCard = getCard(cardPosition);
+        numCards--;
+
+        for (int j = cardPosition; j < cards.length-1; j++) {
             cards[j] = cards[j+1];
         }
-
         return playedCard;
+
+//        Card[] getCard = new Card[0];
+//        Card playedCard = getCard[i];
+//        // removing the played card from the cards shift cards from empty return the play card
+//        for (int j = i; j < numCards-1; j++){
+//            cards[j] = cards[j+1];
+//        }
+//        return playedCard;
     }
 
     //instance method highCard
@@ -169,12 +184,16 @@ public class Hand<newCard> {
     //instead of returning largest value in array
     //method should return Card object with largest value
     //ex; Hand h1 defined above, h1.highCard() returns Card object w/largest value
-        //the King of Hearts
+    //the King of Hearts
     //If multiple cards are tied for largest value
     //return the one that comes closest to the beginning of the cards array
     public Card highCard(){
-        sortCardsValue();
-        return cards[cards.length-1];
+        Card highCard = getCard(0);
+        for (int i = 0; i < numCards; i++) {
+            if (cards[i].getValue() > highCard.getValue())
+                highCard = cards[i];
+        }
+        return highCard;
     }
 
     public void sortCardsValue() {
@@ -211,12 +230,18 @@ public class Hand<newCard> {
     //does not need to exclude hands that would be classified as something else
     //as long as cards are all same suit
     public boolean hasFlush(){
-        if (cards.equals(FLUSH)){
+        if (numCards == 0)
+            return false;
 
+        var suitOfFirstCard = cards[0].getSuit();
+        for (int i = 1; i < numCards; i++){
+            if (cards[i].getSuit() != suitOfFirstCard)
+                return false;
         }
+        return true;
 
-        return false;
+//        if (cards.equals(FLUSH)){
+//        }
+//        return false;
     }
-
-
 }

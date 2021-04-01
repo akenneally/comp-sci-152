@@ -17,13 +17,13 @@ public class University {
     //hireProfessor method takes one param
     //add param to instance variable 'faculty'
     public Professor hireProfessor(Professor newFaculty){
-        ArrayList.add(newFaculty);
+
     }
 
     //admitStudent method takes one param
     //adds param to instance variable studentList
     public Student admitStudent(Student newStudent){
-        ArrayList.add(newStudent);
+
     }
 
     //findStudent method takes one param

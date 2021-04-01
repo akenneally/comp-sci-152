@@ -15,7 +15,7 @@ public class Professor {
         //initialize instance variable adviseeList explicitly with default val null
         name = profName;
         department = dept;
-
+    }
     //addAdvisee method takes on param
     //adds param to instance variable adviseeList
 
@@ -27,11 +27,15 @@ public class Professor {
 
     //getName method takes no params
     //is an accessor for the instance variable name
-
+    public String getName(){
+        return name;
+        }
     //toString method takes no params
     //method should return a string detailing prof's name and dept
-
-
+    public String toString(){
+        return name + department;
     }
 
 }
+
+

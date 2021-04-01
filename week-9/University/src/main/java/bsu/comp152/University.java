@@ -10,19 +10,20 @@ public class University {
     //constructor takes no params
     //should initialize instance variable studentList with new (empty) arrayList
     //should initialize instance variable faculty with new (empty) arrayList
-    public University (){
-
+    public University(){
+        studentList = new ArrayList<Student>();
+        faculty = new ArrayList<Professor>();
     }
     //hireProfessor method takes one param
     //add param to instance variable 'faculty'
     public Professor hireProfessor(Professor newFaculty){
-
+        ArrayList.add(newFaculty);
     }
 
     //admitStudent method takes one param
     //adds param to instance variable studentList
     public Student admitStudent(Student newStudent){
-
+        ArrayList.add(newStudent);
     }
 
     //findStudent method takes one param
@@ -47,7 +48,7 @@ public class University {
             // print student graduates with high honors
         //if student didn't earn high honors but has gps of at least 3.3 -
             //print they graduate with honors
-    public Student graduateStudents{
+    public Student graduateStudents(){
 
     }
 

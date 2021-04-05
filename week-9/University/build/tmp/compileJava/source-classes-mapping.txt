@@ -1,2 +1,6 @@
+bsu/comp152/Student.java
+ bsu.comp152.Student
+bsu/comp152/Professor.java
+ bsu.comp152.Professor
 bsu/comp152/Main.java
  bsu.comp152.Main

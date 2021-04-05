@@ -32,10 +32,18 @@ public class Student {
         //a certain number of credits and certain grade for class
     //method should update instance variables gpa and numberOfCredits
         //taking new course into account
-    public double takeClass(int credits, double grade){
-        numberOfCredits = credits;
-        gpa = grade;
-        return gpa + numberOfCredits;
+    //When you use the programming process to develop your algorithm
+    // to update the GPA and number of credits, you will assume that the GPA is the
+    // total number of points earned divided by the total number of credits taken.
+    // The points earned for each class consist of the number of credits for the class times the
+    // grade as a decimal number (4.0 means A, 3.0 means B, 2.0 means C, 1.0 means D, 0.0 means F).
+    // takeClass(4,3.0)
+    public void takeClass(int credits, double grade){
+        // update the instance variable numberOfCredits which is the cumulative
+        numberOfCredits += credits;
+        double points = numberOfCredits * grade;
+        // update the instance variable gpa
+        gpa = points / numberOfCredits;
     }
 
     //changeAdvisor method takes one param
@@ -43,7 +51,7 @@ public class Student {
     public Professor changeAdvisor(Professor newAdvisor){
         advisor = newAdvisor;
         return newAdvisor;
-        }
+    }
 
     //getName method should take no params
     //method is an accessor for instance variable 'name'
@@ -81,10 +89,12 @@ public class Student {
     //make sure string makes it clear what each piece of data they are
     //return string
     public String toString(){
-        String studentDetails = "";
-        System.out.println("The student's name is: , their ID number is: ," +
-                "their advisor's name is: , and current gpa is: ");
-        return studentDetails;
+        String studentsName = "\nStudents Name: " + getName();
+        String studentID = "\nStudent ID: " + getStudentID();
+        String advisorsName = "\nAdvisor's Name: " + getAdvisor();
+        String gpa = "\nStudent's GPA: " + Double.toString(getGPA());
+
+        return studentsName + studentID + advisorsName + gpa;
         }
 
 }

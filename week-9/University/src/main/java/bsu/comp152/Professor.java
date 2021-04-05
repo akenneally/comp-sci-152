@@ -1,10 +1,11 @@
 package bsu.comp152;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Professor {
     //define three instance variables adviseeList, name, and department
-    private ArrayList<Student> adviseeList;
+    public ArrayList<Student> adviseeList;
     private String name;
     private String department;
 
@@ -15,9 +16,13 @@ public class Professor {
         //initialize instance variable adviseeList explicitly with default val null
         name = profName;
         department = dept;
+        ArrayList<Student> adviseeList = new ArrayList();
     }
-    //addAdvisee method takes on param
+    //addAdvisee method takes one param
     //adds param to instance variable adviseeList
+    public void addAdvisee(Student advisee){
+        //adviseeList.add(advisee);
+    }
 
     //removeAdvisee method takes one param
     //removes param from instance variable adviseeList if param is in adviseeList
@@ -25,15 +30,24 @@ public class Professor {
     //initialize advisee to first student id for param
     //could increment counter and get advisee at index value by counter
 
+
     //getName method takes no params
     //is an accessor for the instance variable name
     public String getName(){
         return name;
         }
+
+     public String getDepartment(){
+        return department;
+     }
+
     //toString method takes no params
     //method should return a string detailing prof's name and dept
     public String toString(){
-        return name + department;
+        String profName = "\nProfessor's Name: " + getName();
+        String dept = "\nProfessor's Department " + getDepartment();
+
+        return profName + dept;
     }
 
 }

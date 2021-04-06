@@ -14,7 +14,7 @@ public class Student {
     // constructor - takes two parameters
     //initialize instance variable name w/ studentName param
     //initialize instance variable advisor w/ initialAdvisor param
-    public Student(Professor initialAdvisor, String studentName) {
+    public Student(String studentName, Professor initialAdvisor){
         //initialize instance variable gpa to 0.0
         //initialize instance variable numberOfCredits to 0
         //initialize instance variable StudentID to value of
@@ -41,45 +41,49 @@ public class Student {
     public void takeClass(int credits, double grade){
         // update the instance variable numberOfCredits which is the cumulative
         numberOfCredits += credits;
-        double points = numberOfCredits * grade;
         // update the instance variable gpa
-        gpa = points / numberOfCredits;
+        gpa = ((numberOfCredits * gpa) + (grade * credits)) / numberOfCredits;
     }
 
     //changeAdvisor method takes one param
     //should update instance variable 'advisor' to new value from param
-    public Professor changeAdvisor(Professor newAdvisor){
+    public void changeAdvisor(Professor newAdvisor){
         advisor = newAdvisor;
-        return newAdvisor;
+//        return newAdvisor;
     }
 
     //getName method should take no params
     //method is an accessor for instance variable 'name'
     public String getName(){
+
         return name;
         }
 
     //getGPA method takes no params
     //accessor for instance variable 'gpa'
     public double getGPA(){
+
         return gpa;
         }
 
     //getCreditHours method takes no param
     //accessor for instance variable 'numberOfCredits'
     public int getCreditHours(){
+
         return numberOfCredits;
         }
 
     //getStudentID method takes no params
     //accessor for instance variable 'studentID'
     public int getStudentID(){
+
         return studentID;
         }
 
     //getAdvisor method takes no params
     //accessor for instance variable 'advisor'
     public Professor getAdvisor(){
+
         return advisor;
         }
 

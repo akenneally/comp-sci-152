@@ -21,7 +21,7 @@ public class Professor {
     //addAdvisee method takes one param
     //adds param to instance variable adviseeList
     public void addAdvisee(Student advisee){
-        //adviseeList.add(advisee);
+        adviseeList.add(advisee);
     }
 
     //removeAdvisee method takes one param
@@ -34,22 +34,22 @@ public class Professor {
     //getName method takes no params
     //is an accessor for the instance variable name
     public String getName(){
+
         return name;
-        }
+    }
 
      public String getDepartment(){
+
         return department;
      }
 
-    //toString method takes no params
-    //method should return a string detailing prof's name and dept
-    public String toString(){
-        String profName = "\nProfessor's Name: " + getName();
-        String dept = "\nProfessor's Department " + getDepartment();
-
-        return profName + dept;
+    @Override
+    public String toString() {
+        return "Professor{" +
+                "name='" + name + '\'' +
+                ", department='" + department + '\'' +
+                '}';
     }
-
 }
 
 

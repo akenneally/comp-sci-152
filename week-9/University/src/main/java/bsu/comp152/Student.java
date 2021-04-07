@@ -27,6 +27,7 @@ public class Student {
         studentID = nextID;
         nextID++;
     }
+
     //takeClass method takes two params
     //method will be called when student takes a class, earning
         //a certain number of credits and certain grade for class
@@ -55,35 +56,30 @@ public class Student {
     //getName method should take no params
     //method is an accessor for instance variable 'name'
     public String getName(){
-
         return name;
         }
 
     //getGPA method takes no params
     //accessor for instance variable 'gpa'
     public double getGPA(){
-
         return gpa;
         }
 
     //getCreditHours method takes no param
     //accessor for instance variable 'numberOfCredits'
     public int getCreditHours(){
-
         return numberOfCredits;
         }
 
     //getStudentID method takes no params
     //accessor for instance variable 'studentID'
     public int getStudentID(){
-
         return studentID;
         }
 
     //getAdvisor method takes no params
     //accessor for instance variable 'advisor'
     public Professor getAdvisor(){
-
         return advisor;
         }
 

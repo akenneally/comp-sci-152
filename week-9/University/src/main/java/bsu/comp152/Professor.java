@@ -29,17 +29,17 @@ public class Professor {
     //to do: could initialize a counter to 0, declare Student object called advisee
     //initialize advisee to first student id for param
     //could increment counter and get advisee at index value by counter
+    public void removeAdvisee(Student advisee){
 
+    }
 
     //getName method takes no params
     //is an accessor for the instance variable name
     public String getName(){
-
         return name;
     }
 
      public String getDepartment(){
-
         return department;
      }
 

@@ -1,35 +1,38 @@
 package bsu.comp152;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/** A class to create University objects
+ * Starter code Laura K. Gross, COMP 152, Bridgewater State University
+ * Completed by: [student name], [student email]
+ * date: [date of completion]
+ */
 public class University {
+
+    // Give the whole class access to the console.
     public static Scanner keyboard = new Scanner(System.in);
-    //Define two instance variables studentList and faculty
-    private ArrayList<Student> studentList;
-    private ArrayList<Professor> faculty;
-    //constructor takes no params
-    //should initialize instance variable studentList with new (empty) arrayList
-    //should initialize instance variable faculty with new (empty) arrayList
+
+    // TODO: Define two instance variables studentList and faculty.
+    private ArrayList<Student> studentList = null;
+    private ArrayList<Professor> faculty = null;
+
+    // TODO: Define a constructor as on project sheet.
     public University() {
         studentList = new ArrayList<>();
         faculty = new ArrayList<>();
     }
-    //hireProfessor method takes one param
-    //add param to instance variable 'faculty'
-    public void hireProfessor(Professor newFaculty) {
-        faculty.add(newFaculty);
+
+    // TODO: Define the hireProfessor method as on project sheet.
+    public void hireProfessor(Professor newProfessor) {
+        faculty.add(newProfessor);
     }
-    //admitStudent method takes one param
-    //adds param to instance variable studentList
+
+    // TODO: Define the admitStudent method as on project sheet.
     public void admitStudent(Student newStudent) {
         studentList.add(newStudent);
     }
-    //findStudent method takes one param
-    //needs to search through studentList to find student with right student ID
-    //needs to return arrayList foundStudent
-    //if student was found, foundStudent needs to include the target Student object
-    //if student was not found, needs to return an empty foundStudent
+
+    // TODO: Define the findStudent method as on project sheet.
     public ArrayList<Student> findStudent(int studentID) {
         var foundStudentList = new ArrayList<Student>();
         studentList.forEach(student -> {
@@ -39,26 +42,18 @@ public class University {
         });
         return foundStudentList;
     }
-    //graduateStudents method takes no params
-    //should iterate through student list
-    //at each pass through the loop
-    //if student has a gpa of at least 2.0
-    //has at least 20 credits
-    //method should remove student from student list
-    //remove student from professor's advisee list
-    //print a congrats message
-    //print student's name
-    //if GPA is higher than 3.7 -
-    // print student graduates with high honors
-    //if student didn't earn high honors but has gps of at least 3.3 -
-    //print they graduate with honors
+
+    // TODO: Define the graduateStudents method as on project sheet.
     public void graduateStudents() {
         var students = new ArrayList<>(this.studentList);
+
         students.forEach(s -> {
             if (s.getGPA() >= 2.0 && s.getCreditHours() >= 20) {
                 studentList.remove(s);
+
                 var currentProfessor = s.getAdvisor();
                 currentProfessor.removeAdvisee(s);
+
                 if (s.getGPA() >= 3.7)
                     System.out.println("Great " + s.getName() + " you made it with high honors");
                 else if (s.getGPA() >= 3.3)
@@ -68,6 +63,7 @@ public class University {
             }
         });
     }
+
     public void runUniversity() {
         int choice;
         do {
@@ -78,9 +74,11 @@ public class University {
             System.out.println("4 - Look up a student");
             System.out.println("5 - Exit main menu");
             System.out.print("Which would you like to do? ");
+
             choice = keyboard.nextInt();
             // Consume newline character.
             keyboard.nextLine();
+
             switch (choice) {
                 case 1:
                     hireAProfessor();
@@ -101,6 +99,7 @@ public class University {
             }
         } while (choice != 5);
     }
+
     private void hireAProfessor() {
         System.out.print("Enter the professor's name.");
         var name = keyboard.nextLine();
@@ -108,30 +107,38 @@ public class University {
         var dept = keyboard.nextLine();
         hireProfessor(new Professor(name, dept));
     }
+
     private void admitAStudent() {
         System.out.print("Enter the student's name.");
         var name = keyboard.nextLine();
+
         if (faculty.isEmpty()){
             System.out.println("No professors yet, cannot add student.");
             return;
         }
+
         var randomInt = (int)(Math.random() * faculty.size()-1);
         var randomProfessor = faculty.get(randomInt);
         var newStudent = new Student(name, randomProfessor);
         randomProfessor.addAdvisee(newStudent);
         admitStudent(newStudent);
     }
+
     private void lookUpAStudent(){
         System.out.print("Enter the student ID to look up.");
         var ID = keyboard.nextInt();
         keyboard.nextLine();
+
         var foundStudentList = findStudent(ID);
+
         if (foundStudentList.isEmpty()) {
             System.out.println("Student with ID " + ID + " was not found.");
             return;
         }
+
         var foundStudent = foundStudentList.get(0);
         System.out.println("Found " + foundStudent.toString());
+
         // Enter the student menu for this student:
         int choice;
         do {
@@ -139,9 +146,11 @@ public class University {
             System.out.println("2 - Assign advisor to student");
             System.out.println("3 - Exit");
             System.out.print("Which would you like to do? ");
+
             choice = keyboard.nextInt();
             // Consume the newline character.
             keyboard.nextLine();
+
             switch (choice) {
                 case 1:
                     System.out.print("Enter number of credits for student.");
@@ -156,11 +165,14 @@ public class University {
                     System.out.print("Enter advisor name from the list.");
                     faculty.forEach(p -> { System.out.println("\n" + p.getName()); });
                     var advisorName = keyboard.nextLine();
+
                     System.out.print("Enter department for this advisor.");
                     var department = keyboard.nextLine();
                     var newProfessor = new Professor(advisorName, department);
+
                     var currentAdvisor = foundStudent.getAdvisor();
                     currentAdvisor.removeAdvisee(foundStudent);
+
                     foundStudent.changeAdvisor(newProfessor);
                     newProfessor.addAdvisee(foundStudent);
                     break;

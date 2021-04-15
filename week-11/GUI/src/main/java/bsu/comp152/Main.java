@@ -1,20 +1,18 @@
 package bsu.comp152;
 
-import com.sun.javafx.stage.EmbeddedWindow;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.geometry.Pos;
-import javafx.event.EventHandler;
-import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
-import javafx.geometry.Insets;
-import javafx.scene.layout.HBox;
+
+import java.util.Locale;
 
 public class Main extends Application {
     public static void main(String[] args){
@@ -22,25 +20,49 @@ public class Main extends Application {
     }
     @Override
     public void start(Stage primaryStage){
-        //Create Label to display prompt
-        Label messageLabel = new Label("Enter a color:");
-        //Create Button to perform color change
-        Button colorButton = new Button("Change Color");
-        //Register the event handler
-        //colorButton.setOnAction(new ButtonClickHandle());
-
-        Circle circle = new Circle(150.0f, 150.0f, 80.f);
-        Group group = new Group(circle);
-        Scene circleScene = new Scene(group, 500, 300);
-        Stage colorStage = null;
-        colorStage.setScene(circleScene);
-        colorStage.show();
-
-        VBox vbox = new VBox(messageLabel);
-        Scene scene = new Scene(vbox, 300, 100);
-        vbox.setAlignment(Pos.CENTER);
+        var vBox = new VBox();
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(15);
+        var hBox = new HBox();
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setSpacing(15);
+        Scene scene = new Scene(vBox, 500, 300);
         primaryStage.setScene(scene);
         primaryStage.setTitle("GUI with Circle");
+
+        //Popup for when invalid color is entered
+        var alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Incorrect response type.");
+        alert.setHeaderText("Please try again with a color.");
+        alert.setContentText("Examples: teal, red, blue");
+
+        //Create Label to display prompt
+        Label messageLabel = new Label("Enter a color:");
+
+        //Create Text Field to display prompt
+        var myTextField = new TextField();
+
+        //Create circle to display
+        Circle colorCircle = new Circle(100, Color.PURPLE);
+        //colorCircle(new Insets(15,15,15,15));
+
+        //Create Button to perform color change
+        Button colorButton = new Button("Change Color");
+        colorButton.setOnAction(event -> {
+            try {
+                var f = Color.class.getField(myTextField.getText().toUpperCase(Locale.ROOT));
+                colorCircle.setFill((Color) f.get(null));
+            } catch (Exception e) {
+                alert.show();
+            }
+        });
+
+        hBox.getChildren().add(messageLabel);
+        hBox.getChildren().add(myTextField);
+        vBox.getChildren().add(hBox);
+        vBox.getChildren().add(colorButton);
+        vBox.getChildren().add(colorCircle);
+
         primaryStage.show();
     }
 }
